@@ -9,5 +9,6 @@
 #import <Cordova/CDVPlugin.h>
 
 @interface CordovaPrinter : CDVPlugin
-- (BOOL) cordovaPrint :(NSString *)labelData;
+- (void) cordovaPrint :(CDVInvokedUrlCommand *)command;
+- (NSString *) cordovaGetPrinter :(CDVInvokedUrlCommand *)command;
 @end
