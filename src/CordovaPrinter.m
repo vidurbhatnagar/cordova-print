@@ -43,7 +43,7 @@
             success = success && [thePrinterConn write:[labelData dataUsingEncoding:NSUTF8StringEncoding] error:&error];
         
             if (success != YES || error != nil) {
-                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }else{
                 CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printer Connection and Creation Failed"];
