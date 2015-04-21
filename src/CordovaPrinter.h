@@ -10,5 +10,5 @@
 
 @interface CordovaPrinter : CDVPlugin
 - (void) cordovaPrint :(CDVInvokedUrlCommand *)command;
-- (NSString *) cordovaGetPrinter :(CDVInvokedUrlCommand *)command;
+- (void) cordovaGetPrinter :(CDVInvokedUrlCommand *)command;
 @end

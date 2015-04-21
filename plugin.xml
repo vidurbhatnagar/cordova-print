@@ -17,6 +17,13 @@
                 <param name="ios-package" value="CordovaPrinter" />
             </feature>
         </config-file>
+
+ <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
+    <array> 
+    <string>com.zebra.rawport</string> 
+    </array> 
+    </config-file>
+
         <header-file src="src/CordovaPrinter.h" />
         <source-file src="src/CordovaPrinter.m" />
 
@@ -49,14 +56,8 @@
 
         <framework src="ExternalAccessory.framework" />
 
- 
-    </platform>
 
-    <platform name="ios">
-    <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
-    <array> 
-    <string>com.zebra.rawport</string> 
-    </array> 
-    </config-file>
+   
+
     </platform>
 </plugin>

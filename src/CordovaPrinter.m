@@ -43,18 +43,25 @@
             success = success && [thePrinterConn write:[labelData dataUsingEncoding:NSUTF8StringEncoding] error:&error];
         
             if (success != YES || error != nil) {
-            
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            }else{
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printer Connection and Creation Failed"];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }
         
         
             // Close the connection to release resources.
             [thePrinterConn close];
+        }else{
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printer Connection Failed"];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }
     });
     
 }
 
-- (NSString *) cordovaGetPrinter:(CDVInvokedUrlCommand *)command
+- (void) cordovaGetPrinter:(CDVInvokedUrlCommand *)command
 {
     NSString *serialNumber = @"";
     //Find the Zebra Bluetooth Accessory
@@ -67,7 +74,15 @@
         }
     }
     
-    return serialNumber;
+    if([serialNumber isEqual:@""])
+    {
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No Serial Number Found."];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+    
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:serialNumber];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
 }
 
 @end
