@@ -5,12 +5,14 @@
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
+    <js-module src="www/printer.js" name="print">
+      <clobbers target="window.plugins.print" />
+    </js-module>
     <name>CordovaPrinter</name>
     <description>Print on a Zebra Printer</description>
     <author>Silverchip</author>
     <keywords>Zebra</keywords>
     <license>Apache 2.0 License</license>
-
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="CordovaPrinter">
@@ -19,9 +21,9 @@
         </config-file>
 
  <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
-    <array> 
-    <string>com.zebra.rawport</string> 
-    </array> 
+    <array>
+    <string>com.zebra.rawport</string>
+    </array>
     </config-file>
 
         <header-file src="src/CordovaPrinter.h" />
@@ -57,7 +59,7 @@
         <framework src="ExternalAccessory.framework" />
 
 
-   
+
 
     </platform>
 </plugin>
