@@ -12,8 +12,8 @@ Example:
 
 ```JavaScript
 var label = '^XA' +
-'^F030,30^FDTest Label^FS' +
-'^XZ';
+    '^F030,30^FDTest Label^FS' +
+    '^XZ';
 var errorCallback = function(err) { console.error(err) }
     
 window.plugins.print.getPrinter(function(serial) { // Get the serial number
@@ -21,4 +21,13 @@ window.plugins.print.getPrinter(function(serial) { // Get the serial number
     console.log('Successfully printed label');
   }, errorCallback(err), serial, label);           // Include the serial number and your ZPL format label
 }, errorCallback(err));                            // Log any errors
+```
+
+If you have a problem where your printer is printing several labels, you need to calibrate it. In my case, I was using the black-line marked labels, so I simply printed the following ZPL code to calibrate it:
+
+```JavaScript
+var calibrate = '~JC' +
+    '^XA' +
+    '^JUS' +
+    'XZ';
 ```
