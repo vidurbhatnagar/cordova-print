@@ -78,7 +78,9 @@
     NSArray * connectedAccessories = [sam connectedAccessories];
     for (EAAccessory *accessory in connectedAccessories) {
         if([accessory.protocolStrings indexOfObject:@"com.zebra.rawport"] != NSNotFound){
-            serialNumber = accessory.serialNumber;
+            serialNumber = [serialNumber stringByAppendingString:@","];
+            serialNumber = [serialNumber stringByAppendingString:accessory.serialNumber];
+            //serialNumber = accessory.serialNumber;
             break;
         }
     }
