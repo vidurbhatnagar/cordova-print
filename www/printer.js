@@ -1,27 +1,27 @@
-function print() {
+function CordovaPrinter() {
 }
 
-print.prototype.getPrinters = function(successCallback, errorCallback) {
+CordovaPrinter.prototype.getPrinters = function(successCallback, errorCallback) {
   cordova.exec(successCallback,
             errorCallback,
             'CordovaPrinter',
             'cordovaGetPrinters');
 };
 
-print.prototype.print = function(successCallback, errorCallback, serialNumber, labelData) {
+CordovaPrinter.prototype.print = function(successCallback, errorCallback, serialNumber, labelData) {
   cordova.exec(successCallback,
              errorCallback,
              'CordovaPrinter',
              'cordovaPrint', [labelData, serialNumber]);
 };
 
-print.install = function() {
+CordovaPrinter.install = function() {
   if (!window.plugins) {
     window.plugins = {};
   }
 
-  window.plugins.print = new print();
-  return window.plugins.print;
+  window.plugins.CordovaPrinter = new CordovaPrinter();
+  return window.plugins.CordovaPrinter;
 };
 
-cordova.addConstructor(print.install);
+cordova.addConstructor(CordovaPrinter.install);

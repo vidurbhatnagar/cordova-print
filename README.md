@@ -6,12 +6,12 @@ Installation:
 `cordova plugin add https://github.com/LiamBateman/cordova-print.git`
 
 **Get printer serial numbers: (Will return all connected zebra printers)**  
-`window.plugins.print.getPrinters(successCallback(serialNumbers),failCallback(error))`  
+`window.plugins.CordovaPrinter.getPrinters(successCallback(serialNumbers),failCallback(error))`  
 
 Example return for 2 printers 'XXXXXXXX1,XXXXXXXX2'
 
 **Print a zpl-formatted block of text (need serial number!):**
-`window.plugins.print.print(successCallback(ok),failCallback(error),serial, label)`
+`window.plugins.CordovaPrinter.print(successCallback(ok),failCallback(error),serial, label)`
 
 Example:
 
@@ -21,13 +21,13 @@ var label = '^XA' +
     '^XZ';
 var errorCallback = function(err) { console.error(err) }
 
-window.plugins.print.getPrinters(function(serialNumbers) { // Get the connect printer serial numbers
+window.plugins.CordovaPrinter.getPrinters(function(serialNumbers) { // Get the connect printer serial numbers
   //Now split the serial numbers
   var serialArray = serialNumbers.split(',');
   serialArray = serialArray.filter(function(n){ return n != undefined && n != '' });
 
   serialArray.forEach(function(curSerial) {
-    window.plugins.print.print(function(success) {   // Call the print method
+    window.plugins.CordovaPrinter.print(function(success) {   // Call the print method
       console.log('Successfully printed label');
     }, errorCallback(err), curSerial, label);           // Include the serial number and your ZPL format label
 
