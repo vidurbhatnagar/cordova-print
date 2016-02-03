@@ -20,7 +20,6 @@
     NSString *labelData = [command.arguments objectAtIndex:0];
     NSString *serielCode = [command.arguments objectAtIndex:1];
 
-
     // Check command.arguments here.
     //Dispatch this task to the default queue
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
@@ -57,11 +56,6 @@
 
             // Close the connection to release resources.
             [thePrinterConn close];
-
-
-
-
-
         }else{
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printer Connection Failed"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -69,8 +63,8 @@
 
      });
 }
-
-- (void) cordovaGetPrinter:(CDVInvokedUrlCommand *)command
+//Returns all the connected printers.
+- (void) cordovaGetPrinters:(CDVInvokedUrlCommand *)command
 {
     NSString *serialNumber = @"";
     //Find the Zebra Bluetooth Accessory
@@ -86,6 +80,7 @@
 
     if([serialNumber isEqual:@""])
     {
+        //No printer found empty
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No Serial Number Found."];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }else{

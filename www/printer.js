@@ -1,11 +1,13 @@
 function print() {
 }
+
 print.prototype.getPrinter = function(successCallback, errorCallback) {
   cordova.exec(successCallback,
             errorCallback,
             'CordovaPrinter',
-            'cordovaGetPrinter');
+            'cordovaGetPrinters');
 };
+
 print.prototype.print = function(successCallback, errorCallback, serialNumber, labelData) {
   cordova.exec(successCallback,
              errorCallback,
@@ -21,4 +23,5 @@ print.install = function() {
   window.plugins.print = new print();
   return window.plugins.print;
 };
+
 cordova.addConstructor(print.install);
