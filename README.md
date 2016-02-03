@@ -21,11 +21,21 @@ var label = '^XA' +
     '^XZ';
 var errorCallback = function(err) { console.error(err) }
 
-window.plugins.print.getPrinter(function(serial) { // Get the serial number
-  window.plugins.print.print(function(success) {   // Call the print method
-    console.log('Successfully printed label');
-  }, errorCallback(err), serial, label);           // Include the serial number and your ZPL format label
+window.plugins.print.getPrinters(function(serialNumbers) { // Get the connect printer serial numbers
+  //Now split the serial numbers
+  var serialArray = serialNumbers.split(',');
+  serialArray = serialArray.filter(function(n){ return n != undefined && n != '' });
+
+  serialArray.forEach(function(curSerial) {
+    window.plugins.print.print(function(success) {   // Call the print method
+      console.log('Successfully printed label');
+    }, errorCallback(err), curSerial, label);           // Include the serial number and your ZPL format label
+
+  });
+
 }, errorCallback(err));                            // Log any errors
+
+
 ```
 
 If you have a problem where your printer is printing several labels, you need to calibrate it. In my case, I was using the black-line marked labels, so I simply printed the following ZPL code to calibrate it:
