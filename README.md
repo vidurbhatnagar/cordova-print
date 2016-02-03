@@ -33,7 +33,7 @@ window.plugins.print.getPrinters(function(serialNumbers) { // Get the connect pr
 
   });
 
-}, errorCallback(err));                            // Log any errors
+}, errorCallback);                            // Log any errors
 
 
 ```

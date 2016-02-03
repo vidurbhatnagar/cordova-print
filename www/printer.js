@@ -1,7 +1,7 @@
 function print() {
 }
 
-print.prototype.getPrinter = function(successCallback, errorCallback) {
+print.prototype.getPrinters = function(successCallback, errorCallback) {
   cordova.exec(successCallback,
             errorCallback,
             'CordovaPrinter',
