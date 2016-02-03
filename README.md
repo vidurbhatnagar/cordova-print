@@ -16,24 +16,33 @@ Example return for 2 printers 'XXXXXXXX1,XXXXXXXX2'
 Example:
 
 ```JavaScript
-var label = '^XA' +
-    '^F030,30^FDTest Label^FS' +
-    '^XZ';
-var errorCallback = function(err) { console.error(err) }
 
-window.plugins.CordovaPrinter.getPrinters(function(serialNumbers) { // Get the connect printer serial numbers
-  //Now split the serial numbers
-  var serialArray = serialNumbers.split(',');
-  serialArray = serialArray.filter(function(n){ return n != undefined && n != '' });
+        var label = '^XA' +
+            '^F030,30^FDTest Label^FS' +
+            '^XZ';
 
-  serialArray.forEach(function(curSerial) {
-    window.plugins.CordovaPrinter.print(function(success) {   // Call the print method
-      console.log('Successfully printed label');
-    }, errorCallback(err), curSerial, label);           // Include the serial number and your ZPL format label
+        window.plugins.CordovaPrinter.getPrinters(function(serialNumbers) { // Get the connect printer serial numbers
+          //Now split the serial numbers
+          var serialArray = serialNumbers.split(',');
+          serialArray = serialArray.filter(function(n){ return n != undefined && n != '' });
 
-  });
+          //Just print to the first serial number
+            window.plugins.CordovaPrinter.print(
+              function(success) {   // Call the print method
+                console.log('Successfully printed label');
+              },
+              function error(err) {
+                console.log('Error Printing to ' + curSerial);
+                console.log(err);
+            },
+            serialArray[0],
+            label);           // Include the serial number and your ZPL format label
 
-}, errorCallback);                            // Log any errors
+        },
+        function error(err) {
+            console.log('Error loading Printers');
+            console.log(err);
+        });                            // Log any errors
 
 
 ```
