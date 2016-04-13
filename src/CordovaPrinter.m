@@ -50,7 +50,7 @@
                 CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }else{
-                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printer Connection and Creation Failed"];
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error];
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }
 
