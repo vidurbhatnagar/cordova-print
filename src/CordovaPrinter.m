@@ -44,8 +44,6 @@
 
             success = success && [thePrinterConn write:data error:&error];
 
-            [NSThread sleepForTimeInterval:2.0f];
-
             if (success == YES && error == nil) {
                 CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -55,6 +53,7 @@
             }
 
             // Close the connection to release resources.
+            [NSThread sleepForTimeInterval:8.0f];
             [thePrinterConn close];
         }else{
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printer Connection Failed"];
